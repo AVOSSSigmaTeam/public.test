@@ -1,8 +1,6 @@
 import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
 export default function hallOfFame(page) {
 
-    page = page || document;
-    
     const projects = [
         {
             artist: "Imagine Dragons",
@@ -373,7 +371,7 @@ export default function hallOfFame(page) {
         clickStartTime = 0;
     let previousMouse = { x: 0, y: 0 };
     // Start offset to center a row with half-rows visible above/below
-    const initialOffsetY = 0.375;  // Half cell size to show partial rows
+    const initialOffsetY = 0.375;  // Half cell size to show partial rows   
     let offset = { x: 0, y: initialOffsetY },
         targetOffset = { x: 0, y: initialOffsetY };
     let mousePosition = { x: -1, y: -1 };
@@ -856,7 +854,8 @@ export default function hallOfFame(page) {
         renderer.render(scene, camera);
     };
 
-    const init = async () => {
+    // const init = async () => {
+    const init = () => {
         const container = page.getElementById("gallery");
         if (!container) return;
 
@@ -875,7 +874,8 @@ export default function hallOfFame(page) {
         );
         container.appendChild(renderer.domElement);
 
-        const imageTextures = await loadTextures();
+        // const imageTextures = await loadTextures();
+        const imageTextures = loadTextures();
         const imageAtlas = createTextureAtlas(imageTextures, false);
         const artistTextAtlas = createTextureAtlas(artistTextTextures, true);
         const songTextAtlas = createTextureAtlas(songTextTextures, true);
