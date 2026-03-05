@@ -1,6 +1,8 @@
 import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
 export default function hallOfFame(page) {
 
+    page = page || document;
+    
     const projects = [
         {
             artist: "Imagine Dragons",
