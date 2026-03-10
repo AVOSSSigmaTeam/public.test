@@ -1690,8 +1690,8 @@ function initHallOfFame() {
         renderer.render(scene, camera);
     };
 
-    // const init = async () => {
-    const init = () => {
+    const init = async () => {
+    // const init = () => {
         const container = document.getElementById("gallery");
         if (!container) return;
 
@@ -1829,3 +1829,4 @@ function initHallOfFamePreload(page) {  // hall of fame preload animation
 
 
 // HoF END
+
