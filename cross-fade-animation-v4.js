@@ -1710,8 +1710,8 @@ function initHallOfFame() {
         );
         container.appendChild(renderer.domElement);
 
-        // const imageTextures = await loadTextures();
-        const imageTextures = loadTextures();
+        const imageTextures = await loadTextures();
+        // const imageTextures = loadTextures();
         const imageAtlas = createTextureAtlas(imageTextures, false);
         const artistTextAtlas = createTextureAtlas(artistTextTextures, true);
         const songTextAtlas = createTextureAtlas(songTextTextures, true);
@@ -1829,4 +1829,5 @@ function initHallOfFamePreload(page) {  // hall of fame preload animation
 
 
 // HoF END
+
 
