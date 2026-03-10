@@ -1,4 +1,16 @@
 import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
+
+
+export const hideYouTubeOverlay = () => {
+    const overlay = document.getElementById("youtube-overlay");
+    if (overlay) {
+        overlay.classList.remove("active");
+        overlay.querySelector("#youtube-iframe").src = "";
+        document.getElementById("gallery")?.classList.remove("blurred");
+        document.body.style.overflow = "";
+    }
+};
+
 export default function hallOfFame() {
 
     const projects = [
@@ -746,15 +758,15 @@ export default function hallOfFame() {
         document.body.style.overflow = "hidden";
     };
 
-    const hideYouTubeOverlay = () => {
-        const overlay = document.getElementById("youtube-overlay");
-        if (overlay) {
-            overlay.classList.remove("active");
-            overlay.querySelector("#youtube-iframe").src = "";
-            document.getElementById("gallery")?.classList.remove("blurred");
-            document.body.style.overflow = "";
-        }
-    };
+    // const hideYouTubeOverlay = () => {
+    //     const overlay = document.getElementById("youtube-overlay");
+    //     if (overlay) {
+    //         overlay.classList.remove("active");
+    //         overlay.querySelector("#youtube-iframe").src = "";
+    //         document.getElementById("gallery")?.classList.remove("blurred");
+    //         document.body.style.overflow = "";
+    //     }
+    // };
 
     const onWindowResize = () => {
         const container = document.getElementById("gallery");
