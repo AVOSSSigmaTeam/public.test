@@ -11,7 +11,7 @@ export const hideYouTubeOverlay = () => {
     }
 };
 
-export default function hallOfFame() {
+export default function initHallOfFame() {
 
     const projects = [
         {
@@ -956,3 +956,4 @@ export default function hallOfFame() {
     // Update the stats bar
     document.getElementById('totalViews').textContent = formatTotal(totalMillions);
 };
+
