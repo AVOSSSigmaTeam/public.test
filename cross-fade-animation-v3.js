@@ -4,6 +4,7 @@
 
 // HoF code too long, needs to be loaded separate
 // import initHallOfFame from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/hall-of-fame.js";
+import * as THREE from "https://unpkg.com/three@0.160.0/build/three.module.js";
 
 import initSpotlightSection from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/spotligh-section-animation.min.js";
 import initDemoSection from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/demo-section-animation.min.js";
@@ -1825,5 +1826,6 @@ function initHallOfFamePreload(page) {  // hall of fame preload animation
   }, 2.5);
 
 }
+
 
 // HoF END
