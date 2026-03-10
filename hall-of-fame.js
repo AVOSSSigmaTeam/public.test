@@ -492,6 +492,7 @@ export default function hallOfFame() {
             ctx.fillRect(0, 0, canvas.width, canvas.height);
         }
 
+        console.log(textures);
         textures.forEach((texture, index) => {
             const x = (index % atlasSize) * textureSize;
             const y = Math.floor(index / atlasSize) * textureSize;
@@ -943,4 +944,5 @@ export default function hallOfFame() {
 
     // Update the stats bar
     document.getElementById('totalViews').textContent = formatTotal(totalMillions);
+
 };
