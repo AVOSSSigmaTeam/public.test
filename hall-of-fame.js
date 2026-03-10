@@ -855,8 +855,8 @@ export default function hallOfFame() {
         renderer.render(scene, camera);
     };
 
-    // const init = async () => {
-    const init = () => {
+    const init = async () => {
+    // const init = () => {
         const container = document.getElementById("gallery");
         if (!container) return;
 
@@ -875,8 +875,8 @@ export default function hallOfFame() {
         );
         container.appendChild(renderer.domElement);
 
-        // const imageTextures = await loadTextures();
-        const imageTextures = loadTextures();
+        const imageTextures = await loadTextures();
+        // const imageTextures = loadTextures();
         const imageAtlas = createTextureAtlas(imageTextures, false);
         const artistTextAtlas = createTextureAtlas(artistTextTextures, true);
         const songTextAtlas = createTextureAtlas(songTextTextures, true);
@@ -946,3 +946,4 @@ export default function hallOfFame() {
     document.getElementById('totalViews').textContent = formatTotal(totalMillions);
 
 };
+
