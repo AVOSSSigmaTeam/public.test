@@ -11,7 +11,7 @@ export const hideYouTubeOverlay = () => {
     }
 };
 
-export default function initHallOfFame() {
+export function initHallOfFame() {
 
     const projects = [
         {
