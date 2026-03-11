@@ -11,7 +11,7 @@ export const hideYouTubeOverlay = () => {
     }
 };
 
-export function initHallOfFame() {
+export default function initHallOfFame() {
 
     const projects = [
         {
@@ -700,7 +700,10 @@ export function initHallOfFame() {
         </div>
       </div>
     `;
-            document.body.appendChild(overlay);
+            // document.body.appendChild(overlay);
+            const mainWrapper = document.querySelector('[data-page-name="hall-of-fame"]');
+            mainWrapper.appendChild(overlay);
+
 
             // Add close functionality (click and touch)
             const backdrop = overlay.querySelector(".youtube-overlay-backdrop");
@@ -956,5 +959,3 @@ export function initHallOfFame() {
     // Update the stats bar
     document.getElementById('totalViews').textContent = formatTotal(totalMillions);
 };
-
-
