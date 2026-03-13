@@ -259,15 +259,14 @@ export default function initSpotlightSection() {
         const outroRevealProgress = (progress - 0.90) / 0.08;
         if (outroHeader) gsap.set(outroHeader, { opacity: outroRevealProgress });
         if (videoOverlay) gsap.set(videoOverlay, { opacity: outroRevealProgress });
+        let videoScale = 1 + outroRevealProgress;
+        if (video) gsap.set(video, {scale: videoScale});
       } else if (progress < 0.90) {
         if (outroHeader) gsap.set(outroHeader, { opacity: 0 });
         if (videoOverlay) gsap.set(videoOverlay, { opacity: 0 });
-        if (video) gsap.set(video, {scale: 1});
       } else if (progress > 0.98) {
         if (outroHeader) gsap.set(outroHeader, { opacity: 1 });
         if (videoOverlay) gsap.set(videoOverlay, { opacity: 1 });
-        let videoScale = 1 + (progress - 0.90) / 0.08;
-        if (video) gsap.set(video, {scale: videoScale});
       }
 
       // Log actual computed transform after GSAP applies it
@@ -390,4 +389,3 @@ export default function initSpotlightSection() {
   log('Script setup complete');
 
 }
-
