@@ -266,7 +266,7 @@ export default function initSpotlightSection() {
       } else if (progress > 0.98) {
         if (outroHeader) gsap.set(outroHeader, { opacity: 1 });
         if (videoOverlay) gsap.set(videoOverlay, { opacity: 1 });
-        let videoScale = 1 + outroRevealProgress;
+        let videoScale = 1 + (progress - 0.90) / 0.08;
         if (video) gsap.set(video, {scale: videoScale});
       }
 
@@ -390,3 +390,4 @@ export default function initSpotlightSection() {
   log('Script setup complete');
 
 }
+
