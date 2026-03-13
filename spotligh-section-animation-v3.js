@@ -68,7 +68,9 @@ export default function initSpotlightSection() {
     const coverImg = document.querySelector('.kaitonote-spotlight .spotlight-cover-img');
     const introHeader = document.querySelector('[data-spotlight-intro-header]');
     const outroHeader = document.querySelector('[data-spotlight-outro-header]');
+    const video = document.querySelector('[data-spotlight-video]');
     const videoOverlay = document.querySelector('.spotlight-video-overlay');
+
 
     log('Elements found:');
     log('  - images:', images.length);
@@ -228,6 +230,18 @@ export default function initSpotlightSection() {
         y: 0,
       });
 
+      // Intro header fade out OG
+      // if (introHeader) {
+      //   if (progress >= 0.6 && progress <= 0.75) {
+      //     const introFadeProgress = (progress - 0.6) / 0.15;
+      //     gsap.set(introHeader, { opacity: 1 - introFadeProgress });
+      //   } else if (progress < 0.6) {
+      //     gsap.set(introHeader, { opacity: 1 });
+      //   } else if (progress > 0.75) {
+      //     gsap.set(introHeader, { opacity: 0 });
+      //   }
+      // }
+
       // Intro header fade out
       if (introHeader) {
         if (progress >= 0.6 && progress <= 0.75) {
@@ -248,9 +262,11 @@ export default function initSpotlightSection() {
       } else if (progress < 0.90) {
         if (outroHeader) gsap.set(outroHeader, { opacity: 0 });
         if (videoOverlay) gsap.set(videoOverlay, { opacity: 0 });
+        if (video) gsap.set(video, {scale: 1});
       } else if (progress > 0.98) {
         if (outroHeader) gsap.set(outroHeader, { opacity: 1 });
         if (videoOverlay) gsap.set(videoOverlay, { opacity: 1 });
+        if (video) gsap.set(video, {scale: 1.1});
       }
 
       // Log actual computed transform after GSAP applies it
