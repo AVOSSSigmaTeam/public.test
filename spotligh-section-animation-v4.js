@@ -266,7 +266,8 @@ export default function initSpotlightSection() {
       } else if (progress > 0.98) {
         if (outroHeader) gsap.set(outroHeader, { opacity: 1 });
         if (videoOverlay) gsap.set(videoOverlay, { opacity: 1 });
-        if (video) gsap.set(video, {scale: 1.1});
+        let videoScale = 1 + outroRevealProgress;
+        if (video) gsap.set(video, {scale: videoScale});
       }
 
       // Log actual computed transform after GSAP applies it
