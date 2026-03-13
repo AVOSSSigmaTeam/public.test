@@ -22,7 +22,7 @@ export default function initSpotlightSection() {
 
 
   // DEBUG: Enable console logging
-  const DEBUG = !true;
+  const DEBUG = true;
   const log = function (...args) {
     if (DEBUG) console.log('[KAITONOTE]', ...args);
   };
@@ -66,8 +66,8 @@ export default function initSpotlightSection() {
 
     const images = document.querySelectorAll('.kaitonote-spotlight .img');
     const coverImg = document.querySelector('.kaitonote-spotlight .spotlight-cover-img');
-    const introHeader = document.querySelector('.kaitonote-spotlight .spotlight-intro-header h1');
-    const outroHeader = document.querySelector('.kaitonote-spotlight .spotlight-outro-header h1');
+    const introHeader = document.querySelector('[data-spotlight-intro-header]');
+    const outroHeader = document.querySelector('[data-spotlight-outro-header]');
     const videoOverlay = document.querySelector('.spotlight-video-overlay');
 
     log('Elements found:');
