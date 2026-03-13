@@ -254,13 +254,16 @@ export default function initSpotlightSection() {
         }
       }
 
+      if (coverScaleValue == 1){
+        let videoScale = 1 + (progress - 0.90) / 0.08;
+        if (video) gsap.set(video, {scale: videoScale});
+      }
+
       // Outro header fade in and video overlay darkening
       if (progress >= 0.90 && progress <= 0.98) {
         const outroRevealProgress = (progress - 0.90) / 0.08;
         if (outroHeader) gsap.set(outroHeader, { opacity: outroRevealProgress });
         if (videoOverlay) gsap.set(videoOverlay, { opacity: outroRevealProgress });
-        let videoScale = 1 + outroRevealProgress;
-        if (video) gsap.set(video, {scale: videoScale});
       } else if (progress < 0.90) {
         if (outroHeader) gsap.set(outroHeader, { opacity: 0 });
         if (videoOverlay) gsap.set(videoOverlay, { opacity: 0 });
