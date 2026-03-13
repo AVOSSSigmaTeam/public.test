@@ -22,7 +22,7 @@ export default function initSpotlightSection() {
 
 
   // DEBUG: Enable console logging
-  const DEBUG = true;
+  const DEBUG = !true;
   const log = function (...args) {
     if (DEBUG) console.log('[KAITONOTE]', ...args);
   };
@@ -255,7 +255,9 @@ export default function initSpotlightSection() {
       }
 
       if (coverScaleValue == 1){
-        let videoScale = 1 + Math.max(0, (progress - 0.90));
+        // let videoScale = 1 + Math.max(0, (progress - 0.90));
+        let videoScale = gsap.utils.mapRange(1, 1.1, 0.9, 1, progress);
+        console.log(videoScale);
         if (video) gsap.set(video, {scale: videoScale});
       }
 
@@ -392,6 +394,3 @@ export default function initSpotlightSection() {
   log('Script setup complete');
 
 }
-
-
-
