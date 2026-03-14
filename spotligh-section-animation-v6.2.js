@@ -276,6 +276,8 @@ export default function initSpotlightSection() {
           });
         }
       }
+      
+      console.log(progress.toFixed(3));
 
       if (coverScaleValue == 1){
         // let videoScale = 1 + Math.max(0, (progress - 0.90));
