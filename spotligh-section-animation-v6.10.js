@@ -241,14 +241,21 @@ export default function initSpotlightSection() {
       //     gsap.set(introHeader, { opacity: 0 });
       //   }
       // }
-
       
       // Intro header animation
+      const intro = {
+        fadeInStart: 0,
+        fadeInEnd: 0.08,
+        holdStart: 0.08,
+        holdEnd: 0.6,
+        fadeOutStart: 0.67,
+        fadeOutEnd: 0.75,
+      }
       if (introHeader) {
 
-        // FADE IN (0 → 0.08)
-        if (progress >= 0 && progress <= 0.08) {
-          let t = progress / 0.08
+        // FADE IN
+        if (progress >= intro.fadeInStart && progress <= intro.fadeInEnd) {
+          let t = progress / intro.fadeInEnd
           t = gsap.utils.clamp(0, 1, t)
 
           const eased = gsap.parseEase('power3.out')(t)
@@ -262,8 +269,8 @@ export default function initSpotlightSection() {
           })
         }
 
-        // HOLD (0.08 → 0.6)
-        else if (progress > 0.08 && progress < 0.6) {
+        // HOLD
+        else if (progress > intro.holdStart && progress < intro.holdEnd) {
           gsap.set(introHeader, {
             opacity: 1,
             yPercent: 0,
@@ -273,9 +280,9 @@ export default function initSpotlightSection() {
           })
         }
 
-        // FADE OUT (0.67 → 0.75)
-        else if (progress >= 0.67 && progress <= 0.75) {
-          let t = (progress - 0.6) / 0.15
+        // FADE OUT
+        else if (progress >= intro.fadeOutStart && progress <= intro.fadeOutEnd) {
+          let t = (progress - intro.fadeOutStart) / (intro.fadeOutEnd - intro.fadeOutStart)
           t = gsap.utils.clamp(0, 1, t)
 
           const eased = gsap.parseEase('power3.in')(t)
@@ -290,7 +297,7 @@ export default function initSpotlightSection() {
         }
 
         // AFTER
-        else if (progress > 0.75) {
+        else if (progress > intro.fadeOutEnd) {
           gsap.set(introHeader, {
             opacity: 0,
             yPercent: -50,
@@ -301,11 +308,17 @@ export default function initSpotlightSection() {
         }
       }
 
-      console.log(progress);
+      // console.log(progress);
+
+      const videoScaleConfig = {
+        start: 0.825,
+        end: 0.98,
+        scaleStart: 1,
+        scaleEnd: 1.4,
+      }
+      let videoScale = Math.max(1, gsap.utils.mapRange(videoScaleConfig.start, videoScaleConfig.end, videoScaleConfig.scaleStart, videoScaleConfig.scaleEnd, progress));
 
       if (coverScaleValue == 1){
-        // let videoScale = 1 + Math.max(0, (progress - 0.90));
-        let videoScale = Math.max(1, gsap.utils.mapRange(0.825, 0.98, 1, 1.4, progress));
         if (video) gsap.set(video, {scale: videoScale});
       }
 
@@ -321,10 +334,16 @@ export default function initSpotlightSection() {
       //   if (outroHeader) gsap.set(outroHeader, { opacity: 1 });
       //   if (videoOverlay) gsap.set(videoOverlay, { opacity: 1 });
       // }
-      if (progress >= 0.90 && progress <= 0.98) {
-        const outroRevealProgress = (progress - 0.90) / 0.08;
+
+      const outro = {
+        fadeInStart: 0.90,
+        fadeInEnd: 0.98,
+      }
+
+      if (progress >= outro.fadeInStart && progress <= outro.fadeInEnd) {
+        const outroRevealProgress = (progress - outro.fadeInStart) / (outro.fadeInEnd - outro.fadeInStart);
         if (outroHeader) {
-          let t = (progress - 0.9) / 0.08
+          let t = (progress - outro.fadeInStart) / (outro.fadeInEnd - outro.fadeInStart)
           t = gsap.utils.clamp(0, 1, t)
 
           const eased = gsap.parseEase('power3.out')(t)
@@ -338,7 +357,7 @@ export default function initSpotlightSection() {
           })
         }
         if (videoOverlay) gsap.set(videoOverlay, { opacity: outroRevealProgress });
-      } else if (progress < 0.90) {
+      } else if (progress < outro.fadeInStart) {
         if (outroHeader) {
           gsap.set(outroHeader, {
             opacity: 0,
@@ -347,7 +366,7 @@ export default function initSpotlightSection() {
           })
         }
         if (videoOverlay) gsap.set(videoOverlay, { opacity: 0 });
-      } else if (progress > 0.98) {
+      } else if (progress > outro.fadeInEnd) {
         if (outroHeader) {
           gsap.set(outroHeader, {
             opacity: 1,
