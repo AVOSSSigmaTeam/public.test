@@ -244,63 +244,64 @@ export default function initSpotlightSection() {
 
       
       // Intro header animation
-      const fadeEnd = 0.15;
       if (introHeader) {
-        if (progress >= 0 && progress <= fadeEnd) {
-          let t = progress / fadeEnd;
-          t = gsap.utils.clamp(0, 1, t);
 
-          const easedIn = gsap.parseEase('power3.out')(t);
+        // FADE IN (0 → 0.15)
+        if (progress >= 0 && progress <= 0.15) {
+          let t = progress / 0.15
+          t = gsap.utils.clamp(0, 1, t)
+
+          const eased = gsap.parseEase('power3.out')(t)
 
           gsap.set(introHeader, {
-            opacity: easedIn,
-            yPercent: 50 * (1 - easedIn),
-            z: -200 * (1 - easedIn),
-            rotateX: 10 * (1 - easedIn),
-            filter: `blur(${18 * (1 - easedIn)}px)`,
-          });
-        } else if (progress > fadeEnd) {
-          gsap.set(introHeader, {
-            opacity: 1,
-            yPercent: 0,
+            opacity: eased,
+            yPercent: 50 * (1 - eased),
             z: 0,
             rotateX: 0,
             filter: 'blur(0px)',
-          });
+          })
         }
-        if (progress >= 0.6 && progress <= 0.75) {
-          let t = (progress - 0.6) / 0.15;
-          t = gsap.utils.clamp(0, 1, t);
 
-          const easedOut = gsap.parseEase('power3.in')(t);
-
-          gsap.set(introHeader, {
-            opacity: 1 - easedOut,
-            yPercent: -50 * easedOut,
-            z: -300 * easedOut,
-            rotateX: -12 * easedOut,
-            filter: `blur(${8 * easedOut}px)`,
-          });
-        } else if (progress < 0.6) {
+        // HOLD (0.15 → 0.6)
+        else if (progress > 0.15 && progress < 0.6) {
           gsap.set(introHeader, {
             opacity: 1,
             yPercent: 0,
             z: 0,
             rotateX: 0,
             filter: 'blur(0px)',
-          });
-        } else if (progress > 0.75) {
+          })
+        }
+
+        // FADE OUT (0.6 → 0.75)
+        else if (progress >= 0.6 && progress <= 0.75) {
+          let t = (progress - 0.6) / 0.15
+          t = gsap.utils.clamp(0, 1, t)
+
+          const eased = gsap.parseEase('power3.in')(t)
+
+          gsap.set(introHeader, {
+            opacity: 1 - eased,
+            yPercent: -50 * eased,
+            z: -300 * eased,
+            rotateX: -12 * eased,
+            filter: `blur(${8 * eased}px)`,
+          })
+        }
+
+        // AFTER
+        else if (progress > 0.75) {
           gsap.set(introHeader, {
             opacity: 0,
             yPercent: -50,
             z: -300,
             rotateX: -12,
             filter: 'blur(8px)',
-          });
+          })
         }
       }
 
-      console.log(progress.toFixed(3));
+      console.log(progress);
 
       if (coverScaleValue == 1){
         // let videoScale = 1 + Math.max(0, (progress - 0.90));
