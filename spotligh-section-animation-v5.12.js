@@ -256,7 +256,7 @@ export default function initSpotlightSection() {
 
       if (coverScaleValue == 1){
         // let videoScale = 1 + Math.max(0, (progress - 0.90));
-        let videoScale = Math.max(1, gsap.utils.mapRange(0.825, 0.98, 1, 1.2, progress));
+        let videoScale = Math.max(1, gsap.utils.mapRange(0.825, 0.98, 1, 1.5, progress));
         console.log(progress, videoScale);
         if (video) gsap.set(video, {scale: videoScale});
       }
@@ -394,6 +394,7 @@ export default function initSpotlightSection() {
   log('Script setup complete');
 
 }
+
 
 
 
