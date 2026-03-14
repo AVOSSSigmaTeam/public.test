@@ -405,7 +405,7 @@ export default function initSpotlightSection() {
     const st = ScrollTrigger.create({
       trigger: '.kaitonote-spotlight',
       // start: 'top top',
-      start: 'top 20%',
+      start: 'top top+=20%',
       end: '+=' + animationLength + 'px',
       markers: true,
       pin: true,
