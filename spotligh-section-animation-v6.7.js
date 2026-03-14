@@ -20,7 +20,7 @@ export default function initSpotlightSection() {
  * - FIXED: Page refresh mid-section now immediately syncs to correct state (no scrub delay)
  */
 
-  
+
   // DEBUG: Enable console logging
   const DEBUG = !true;
   const log = function (...args) {
@@ -310,15 +310,51 @@ export default function initSpotlightSection() {
       }
 
       // Outro header fade in and video overlay darkening
+      // if (progress >= 0.90 && progress <= 0.98) {
+      //   const outroRevealProgress = (progress - 0.90) / 0.08;
+      //   if (outroHeader) gsap.set(outroHeader, { opacity: outroRevealProgress });
+      //   if (videoOverlay) gsap.set(videoOverlay, { opacity: outroRevealProgress });
+      // } else if (progress < 0.90) {
+      //   if (outroHeader) gsap.set(outroHeader, { opacity: 0 });
+      //   if (videoOverlay) gsap.set(videoOverlay, { opacity: 0 });
+      // } else if (progress > 0.98) {
+      //   if (outroHeader) gsap.set(outroHeader, { opacity: 1 });
+      //   if (videoOverlay) gsap.set(videoOverlay, { opacity: 1 });
+      // }
       if (progress >= 0.90 && progress <= 0.98) {
         const outroRevealProgress = (progress - 0.90) / 0.08;
-        if (outroHeader) gsap.set(outroHeader, { opacity: outroRevealProgress });
+        if (outroHeader) {
+          let t = (progress - 0.9) / 0.08
+          t = gsap.utils.clamp(0, 1, t)
+
+          const eased = gsap.parseEase('power3.out')(t)
+
+          gsap.set(outroHeader, {
+            opacity: eased,
+            yPercent: 50 * (1 - eased),
+            z: 0,
+            rotateX: 0,
+            filter: `blur(${8 * (1 - eased)}px)`,
+          })
+        }
         if (videoOverlay) gsap.set(videoOverlay, { opacity: outroRevealProgress });
       } else if (progress < 0.90) {
-        if (outroHeader) gsap.set(outroHeader, { opacity: 0 });
+        if (outroHeader) {
+          gsap.set(outroHeader, {
+            opacity: 0,
+            yPercent: 50,
+            filter: 'blur(8px)',
+          })
+        }
         if (videoOverlay) gsap.set(videoOverlay, { opacity: 0 });
       } else if (progress > 0.98) {
-        if (outroHeader) gsap.set(outroHeader, { opacity: 1 });
+        if (outroHeader) {
+          gsap.set(outroHeader, {
+            opacity: 1,
+            yPercent: 0,
+            filter: 'blur(0px)',
+          })
+        }
         if (videoOverlay) gsap.set(videoOverlay, { opacity: 1 });
       }
 
