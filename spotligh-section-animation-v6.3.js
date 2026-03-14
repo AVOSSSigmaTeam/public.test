@@ -243,20 +243,43 @@ export default function initSpotlightSection() {
       // }
 
       
-      // Intro header fade out
+      // Intro header animation
+      const fadeEnd = 0.15;
       if (introHeader) {
+        if (progress >= 0 && progress <= fadeEnd) {
+          let t = progress / fadeEnd;
+          t = gsap.utils.clamp(0, 1, t);
+
+          const easedIn = gsap.parseEase('power3.out')(t);
+
+          gsap.set(introHeader, {
+            opacity: easedIn,
+            yPercent: 50 * (1 - easedIn),
+            z: -200 * (1 - easedIn),
+            rotateX: 10 * (1 - easedIn),
+            filter: `blur(${18 * (1 - easedIn)}px)`,
+          });
+        } else if (progress > fadeEnd) {
+          gsap.set(introHeader, {
+            opacity: 1,
+            yPercent: 0,
+            z: 0,
+            rotateX: 0,
+            filter: 'blur(0px)',
+          });
+        }
         if (progress >= 0.6 && progress <= 0.75) {
           let t = (progress - 0.6) / 0.15;
           t = gsap.utils.clamp(0, 1, t);
 
-          const eased = gsap.parseEase('power3.in')(t);
+          const easedOut = gsap.parseEase('power3.in')(t);
 
           gsap.set(introHeader, {
-            opacity: 1 - eased,
-            yPercent: -50 * eased,
-            z: -300 * eased,
-            rotateX: -12 * eased,
-            filter: `blur(${8 * eased}px)`,
+            opacity: 1 - easedOut,
+            yPercent: -50 * easedOut,
+            z: -300 * easedOut,
+            rotateX: -12 * easedOut,
+            filter: `blur(${8 * easedOut}px)`,
           });
         } else if (progress < 0.6) {
           gsap.set(introHeader, {
@@ -276,13 +299,12 @@ export default function initSpotlightSection() {
           });
         }
       }
-      
+
       console.log(progress.toFixed(3));
 
       if (coverScaleValue == 1){
         // let videoScale = 1 + Math.max(0, (progress - 0.90));
         let videoScale = Math.max(1, gsap.utils.mapRange(0.825, 0.98, 1, 1.4, progress));
-        console.log(progress, videoScale);
         if (video) gsap.set(video, {scale: videoScale});
       }
 
