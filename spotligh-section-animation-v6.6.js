@@ -258,7 +258,7 @@ export default function initSpotlightSection() {
             yPercent: 50 * (1 - eased),
             z: 0,
             rotateX: 0,
-            filter: `blur(${8 * eased}px)`,
+            filter: `blur(${8 * (1 - eased)}px)`,
           })
         }
 
