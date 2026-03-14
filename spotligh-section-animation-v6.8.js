@@ -258,7 +258,7 @@ export default function initSpotlightSection() {
             yPercent: 50 * (1 - eased),
             z: 0,
             rotateX: 0,
-            filter: `blur(${8 * (1 - eased)}px)`,
+            filter: `blur(${14 * (1 - eased)}px)`,
           })
         }
 
@@ -285,7 +285,7 @@ export default function initSpotlightSection() {
             yPercent: -50 * eased,
             z: -300 * eased,
             rotateX: -12 * eased,
-            filter: `blur(${8 * eased}px)`,
+            filter: `blur(${14 * eased}px)`,
           })
         }
 
@@ -296,7 +296,7 @@ export default function initSpotlightSection() {
             yPercent: -50,
             z: -300,
             rotateX: -12,
-            filter: 'blur(8px)',
+            filter: 'blur(14px)',
           })
         }
       }
@@ -334,7 +334,7 @@ export default function initSpotlightSection() {
             yPercent: 50 * (1 - eased),
             z: 0,
             rotateX: 0,
-            filter: `blur(${8 * (1 - eased)}px)`,
+            filter: `blur(${14 * (1 - eased)}px)`,
           })
         }
         if (videoOverlay) gsap.set(videoOverlay, { opacity: outroRevealProgress });
@@ -343,7 +343,7 @@ export default function initSpotlightSection() {
           gsap.set(outroHeader, {
             opacity: 0,
             yPercent: 50,
-            filter: 'blur(8px)',
+            filter: 'blur(14px)',
           })
         }
         if (videoOverlay) gsap.set(videoOverlay, { opacity: 0 });
