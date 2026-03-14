@@ -405,10 +405,10 @@ export default function initSpotlightSection() {
     const st = ScrollTrigger.create({
       trigger: '.kaitonote-spotlight',
       // start: 'top top',
-      start: 'top top+=20%',
+      start: 'top 20%',
       end: '+=' + animationLength + 'px',
       markers: true,
-      pin: true,
+      pin: !true, // DEBUG: Disable pinning to test without it (fixes pinned content disappearing on refresh)
       pinSpacing: true,
       scrub: 1,
       onUpdate: function (self) {
