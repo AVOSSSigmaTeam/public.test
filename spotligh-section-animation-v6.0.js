@@ -242,21 +242,46 @@ export default function initSpotlightSection() {
       //   }
       // }
 
+      
+      const blurIn = 'blur(18px)';
+      const blurOut = 'blur(14px)';
       // Intro header fade out
       if (introHeader) {
         if (progress >= 0.6 && progress <= 0.75) {
-          const introFadeProgress = (progress - 0.6) / 0.15;
-          gsap.set(introHeader, { opacity: 1 - introFadeProgress });
+          let t = (progress - 0.6) / 0.15;
+          t = gsap.utils.clamp(0, 1, t);
+
+          const eased = gsap.parseEase('power3.in')(t);
+
+          gsap.set(introHeader, {
+            opacity: 1 - eased,
+            yPercent: -50 * eased,
+            z: -300 * eased,
+            rotateX: -12 * eased,
+            filter: blurIn,
+          });
         } else if (progress < 0.6) {
-          gsap.set(introHeader, { opacity: 1 });
+          gsap.set(introHeader, {
+            opacity: 1,
+            yPercent: 0,
+            z: 0,
+            rotateX: 0,
+            filter: 'blur(0px)',
+          });
         } else if (progress > 0.75) {
-          gsap.set(introHeader, { opacity: 0 });
+          gsap.set(introHeader, {
+            opacity: 0,
+            yPercent: -50,
+            z: -300,
+            rotateX: -12,
+            filter: blurOut,
+          });
         }
       }
 
       if (coverScaleValue == 1){
         // let videoScale = 1 + Math.max(0, (progress - 0.90));
-        let videoScale = Math.max(1, gsap.utils.mapRange(0.825, 0.98, 1, 1.5, progress));
+        let videoScale = Math.max(1, gsap.utils.mapRange(0.825, 0.98, 1, 1.4, progress));
         console.log(progress, videoScale);
         if (video) gsap.set(video, {scale: videoScale});
       }
@@ -394,10 +419,3 @@ export default function initSpotlightSection() {
   log('Script setup complete');
 
 }
-
-
-
-
-
-
-
