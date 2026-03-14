@@ -20,6 +20,7 @@ export default function initSpotlightSection() {
  * - FIXED: Page refresh mid-section now immediately syncs to correct state (no scrub delay)
  */
 
+  
   // DEBUG: Enable console logging
   const DEBUG = !true;
   const log = function (...args) {
