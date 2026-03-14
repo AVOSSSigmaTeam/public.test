@@ -243,8 +243,6 @@ export default function initSpotlightSection() {
       // }
 
       
-      const blurIn = 'blur(18px)';
-      const blurOut = 'blur(14px)';
       // Intro header fade out
       if (introHeader) {
         if (progress >= 0.6 && progress <= 0.75) {
@@ -258,7 +256,7 @@ export default function initSpotlightSection() {
             yPercent: -50 * eased,
             z: -300 * eased,
             rotateX: -12 * eased,
-            filter: blurIn,
+            filter: `blur(${8 * eased}px)`,
           });
         } else if (progress < 0.6) {
           gsap.set(introHeader, {
@@ -274,7 +272,7 @@ export default function initSpotlightSection() {
             yPercent: -50,
             z: -300,
             rotateX: -12,
-            filter: blurOut,
+            filter: 'blur(8px)',
           });
         }
       }
