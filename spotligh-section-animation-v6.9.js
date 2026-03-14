@@ -246,9 +246,9 @@ export default function initSpotlightSection() {
       // Intro header animation
       if (introHeader) {
 
-        // FADE IN (0 → 0.15)
-        if (progress >= 0 && progress <= 0.15) {
-          let t = progress / 0.15
+        // FADE IN (0 → 0.08)
+        if (progress >= 0 && progress <= 0.08) {
+          let t = progress / 0.08
           t = gsap.utils.clamp(0, 1, t)
 
           const eased = gsap.parseEase('power3.out')(t)
@@ -262,8 +262,8 @@ export default function initSpotlightSection() {
           })
         }
 
-        // HOLD (0.15 → 0.6)
-        else if (progress > 0.15 && progress < 0.6) {
+        // HOLD (0.08 → 0.6)
+        else if (progress > 0.08 && progress < 0.6) {
           gsap.set(introHeader, {
             opacity: 1,
             yPercent: 0,
@@ -273,8 +273,8 @@ export default function initSpotlightSection() {
           })
         }
 
-        // FADE OUT (0.6 → 0.75)
-        else if (progress >= 0.6 && progress <= 0.75) {
+        // FADE OUT (0.67 → 0.75)
+        else if (progress >= 0.67 && progress <= 0.75) {
           let t = (progress - 0.6) / 0.15
           t = gsap.utils.clamp(0, 1, t)
 
