@@ -1,19 +1,8 @@
 export default function initDemoSection() {
   /**
- * IMAGE TRAIL ANIMATION - FINAL VERSION
- * =====================================
- *
- * FIXES INCLUDED:
- * 1. Memory Leak Fix - Uses object pooling (50 reusable DOM elements)
- * 2. Network Spam Fix - Preloads all images once and caches them
- * 3. Z-Index Fix - Increments z-index so newer images always appear on top
- *
- * TESTED: 10+ minutes, 40,000+ mouse events, zero memory growth
- *
- * FOR WEBFLOW: Replace the imageSources array below with your CDN URLs
- */
+  * IMAGE TRAIL ANIMATION
+  */
 
-// (function() {
   const container = document.querySelector(".image-trail-container");
   if (!container) return;
 
@@ -36,17 +25,7 @@ export default function initDemoSection() {
 
   // ===========================================
   // IMAGE SOURCES
-  // Option 1: Local paths (uncomment for local development)
-  // Option 2: Webflow CDN URLs (uncomment for Webflow)
   // ===========================================
-
-  // OPTION 1: Local paths
-  // const imageSources = Array.from(
-  //   { length: config.imageCount },
-  //   (_, i) => `images/trail/img${i + 1}.jpg`
-  // );
-
-  // OPTION 2: Webflow CDN URLs (REPLACE WITH YOUR ACTUAL URLs)
   const imageSources = [
     'https://cdn.prod.website-files.com/695f71824ef82b1e7dd190b4/696625f7e6b2229b82a41dad_img_1.avif',
     'https://cdn.prod.website-files.com/695f71824ef82b1e7dd190b4/696625f7826f804dd2634a13_img_2.avif',
@@ -137,15 +116,15 @@ export default function initDemoSection() {
   // STATE VARIABLES
   // ===========================================
   let mouseX = 0,
-    mouseY = 0,
-    lastMouseX = 0,
-    lastMouseY = 0;
+      mouseY = 0,
+      lastMouseX = 0,
+      lastMouseY = 0;
   let isMoving = false,
-    isCursorInContainer = false;
+      isCursorInContainer = false;
   let lastSteadyImageTime = 0,
-    lastScrollTime = 0;
+      lastScrollTime = 0;
   let isScrolling = false,
-    scrollTicking = false;
+      scrollTicking = false;
 
   // FIX #3: Z-INDEX COUNTER
   // Ensures newer images always appear on top
@@ -160,6 +139,14 @@ export default function initDemoSection() {
       x >= rect.left && x <= rect.right && y >= rect.top && y <= rect.bottom
     );
   };
+
+  function hasCursor() {
+  if (typeof window === "undefined" || !window.matchMedia) {
+    return false;
+  }
+
+  return window.matchMedia("(any-pointer: fine)").matches;
+}
 
   const setInitialMousePos = (event) => {
     mouseX = event.clientX;
@@ -182,7 +169,7 @@ export default function initDemoSection() {
   // TRAIL IMAGE CREATION
   // ===========================================
   const createTrailImage = () => {
-    if (!isCursorInContainer) return;
+    if (!isCursorInContainer || !hasCursor) return;
 
     const now = Date.now();
 
@@ -383,6 +370,5 @@ export default function initDemoSection() {
       animate();
     }
   }, 3000);
-// })();
 
 }
