@@ -169,7 +169,7 @@ export default function initDemoSection() {
   // TRAIL IMAGE CREATION
   // ===========================================
   const createTrailImage = () => {
-    if (!isCursorInContainer || !hasCursor()) return;
+    if (!isCursorInContainer && !hasCursor()) return;
 
     const now = Date.now();
 
