@@ -141,12 +141,15 @@ export default function initDemoSection() {
   };
 
   function hasCursor() {
-  if (typeof window === "undefined" || !window.matchMedia) {
-    return false;
-  }
+    if (typeof window === "undefined" || !window.matchMedia) {
+      return false;
+    }
 
-  return window.matchMedia("(any-pointer: fine)").matches;
-}
+    return window.matchMedia("(any-pointer: fine)").matches;
+  }
+  
+  let isDesktop = hasCursor();
+  console.log("Desktop: " + isDesktop + "");
 
   const setInitialMousePos = (event) => {
     mouseX = event.clientX;
@@ -169,7 +172,7 @@ export default function initDemoSection() {
   // TRAIL IMAGE CREATION
   // ===========================================
   const createTrailImage = () => {
-    if (!isCursorInContainer && !hasCursor()) return;
+    if (!isCursorInContainer && !isDesktop) return;
 
     const now = Date.now();
 
