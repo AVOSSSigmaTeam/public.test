@@ -22,6 +22,7 @@ export default function initDemoSection() {
     outEasing: "cubic-bezier(.87, 0, .13, 1)",
     maxTrailLength: 60,       // Maximum active trail images
   };
+  const DEBUG = false;
 
   // ===========================================
   // IMAGE SOURCES
@@ -149,7 +150,7 @@ export default function initDemoSection() {
   }
   
   let isDesktop = hasCursor();
-  console.log("Desktop: " + isDesktop + "");
+  if (DEBUG) console.log("Desktop: " + isDesktop + "");
 
   const setInitialMousePos = (event) => {
     mouseX = event.clientX;
