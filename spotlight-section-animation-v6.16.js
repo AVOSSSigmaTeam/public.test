@@ -407,7 +407,7 @@ export default function initSpotlightSection() {
       start: 'top top',
       // start: 'top 20%',
       end: '+=' + animationLength + 'px',
-      markers: true,
+      markers: DEBUG,
       pin: true,
       pinSpacing: true,
       scrub: 1,
