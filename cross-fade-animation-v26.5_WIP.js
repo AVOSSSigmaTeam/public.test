@@ -2,7 +2,7 @@
 
 import initSpotlightSection from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/spotlight-section-animation-v6.16.js";
 import initDemoSection from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/demo-section-animation_v2.4.js";
-import {hideYouTubeOverlay, initHallOfFame} from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/hall-of-fame_v8.4_WIP.js";
+import {hideYouTubeOverlay, initHallOfFame} from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/hall-of-fame_v8.4.js";
 
 import { restartWebflow } from 'https://cdn.jsdelivr.net/npm/@finsweet/ts-utils/+esm';
 
@@ -41,11 +41,6 @@ const loadingContainer = document.querySelector('[data-loader-container]');
 
 let employeAvatarAnimationInterval = null;
 let player = null;
-
-// let nodeClones = {
-//   homeSpotlightSection: null,
-//   homeAudioControls: null,
-// };
 
 // FUNCTION REGISTRY
 
@@ -207,16 +202,6 @@ function runPageEnterAnimation(next){
     duration: 0.75,
   }, "startEnter");
 
-  // tl.fromTo(next.querySelector('h1'), {
-  //   yPercent: 25,
-  //   autoAlpha: 0,
-  // }, {
-  //   yPercent: 0,
-  //   autoAlpha: 1,
-  //   ease: "expo.out",
-  //   duration: 1,
-  // }, "< 0.3");
-
   tl.add("pageReady");
   tl.call(resetPage, [next], "pageReady");
 
@@ -291,7 +276,6 @@ barba.hooks.afterLeave(() => {
 
 barba.hooks.enter(data => {
   initBarbaNavUpdate(data);
-  // checkNavSubmitDemoButton(data.next.container);
 })
 
 barba.hooks.afterEnter(async data => {
@@ -319,10 +303,6 @@ barba.hooks.afterEnter(async data => {
     lenis.resize();
     lenis.start();
   }
-
-  // if(hasScrollTrigger){
-  //   ScrollTrigger.refresh();
-  // }
 
 });
 
@@ -402,13 +382,7 @@ function initLenis() {
   if (lenis) return; // already created
   if (!hasLenis) return;
 
-  // lenis = new Lenis({
-  //   lerp: 0.165,
-  //   wheelMultiplier: 1.25,
-  // });
-
   lenis = new Lenis({
-    // duration: isMobile ? 0.8 : 1.2,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // easeOutExpo
     orientation: 'vertical',
     gestureOrientation: 'vertical',
@@ -484,8 +458,6 @@ function initBarbaNavUpdate(data) {
 
 function initAnimatedEmployeeAvatars(avatars) {
 
-  // const avatars = document.querySelectorAll('[data-animate-employee-avatar]');
-  // if (avatars.length === 0) return;
   let i = 0;
   const animationDelay = 2500; //in ms
   employeAvatarAnimationInterval = setInterval(() => {
@@ -846,9 +818,6 @@ function initNavigationChannelsMenuExpandAnimation(page) {
 }
 
 function initSimpleLoaderAnimation(page) {
-  // page = page || document;
-
-  // const loadingContainer = page.querySelector('[data-loader-container]');
 
   const tl = gsap.timeline();
   const animationDuration = 1;
@@ -958,16 +927,6 @@ function initDemoSectionForm() {
 
 }
 
-// function formNameGenerator(page) {
-//   page = page || document;
-//   const form = page.querySelector('#wf-form-Demo-Submission');
-//   if (!form) return;
-//   const uuid = crypto.randomUUID(); // secure unique ID
-//   const formName = form.getAttribute("name") || "7Clouds Demo Submission";
-//   const newFormName = `${formName} #${uuid}`;
-//   form.setAttribute("data-name", newFormName);
-// }
-
 
 // HOME
 class AudioStemsPlayer{constructor(t={}){this.config={basePath:t.basePath||"https://cdn.prod.website-files.com/695f71824ef82b1e7dd190b4/",stems:t.stems||[{name:"synth",file:"69650b64703b50c5ff6bae5c_synth.mp3",triggerAt:0,initialGain:1},{name:"vocals",file:"69650b649b1c1def639b4e2f_vocals.mp3",triggerAt:.2,initialGain:0},{name:"bass",file:"69650b640c593a7a72a650fc_bass.mp3",triggerAt:.55,initialGain:0},{name:"drums",file:"69650b64ea9113fff0233159_drums.mp3",triggerAt:.85,initialGain:0}],fadeDuration:t.fadeDuration||2,masterVolume:t.masterVolume||.8,debug:t.debug||!1},this.audioContext=null,this.masterGain=null,this.stemNodes=new Map,this.isPlaying=!1,this.isLoaded=!1,this.isMuted=!1,this.loadProgress=0,this.onLoadProgress=t.onLoadProgress||null,this.onReady=t.onReady||null,this.onError=t.onError||null,this.handleVisibilityChange=this.handleVisibilityChange.bind(this)}async init(){if(this.isLoaded)return this.audioContext&&"suspended"===this.audioContext.state&&await this.audioContext.resume(),this.log("Audio system already initialized, resuming"),!0;try{return this.audioContext=new(window.AudioContext||window.webkitAudioContext),this.masterGain=this.audioContext.createGain(),this.masterGain.gain.value=this.config.masterVolume,this.masterGain.connect(this.audioContext.destination),await this.loadStems(),document.addEventListener("visibilitychange",this.handleVisibilityChange),this.isLoaded=!0,this.log("Audio system initialized"),this.onReady&&this.onReady(),!0}catch(t){return DEBUG?console.error("AudioStemsPlayer init error:",t):'',this.onError&&this.onError(t),!1}}async loadStems(){let t=this.config.stems.length,i=0,e=this.config.stems.map(async e=>{try{let s=this.config.basePath+e.file,a=await fetch(s);if(!a.ok)throw Error(`Failed to load ${e.file}: ${a.status}`);let o=await a.arrayBuffer(),n=await this.audioContext.decodeAudioData(o),r=this.audioContext.createGain();r.gain.value=e.initialGain,r.connect(this.masterGain),this.stemNodes.set(e.name,{buffer:n,source:null,gain:r,config:e,currentGain:e.initialGain}),i++,this.loadProgress=i/t,this.onLoadProgress&&this.onLoadProgress(this.loadProgress,e.name),this.log(`Loaded: ${e.name} (${Math.round(100*this.loadProgress)}%)`)}catch(u){throw DEBUG?console.error(`Error loading stem ${e.name}:`,u):'',u}});await Promise.all(e),this.log("All stems loaded")}play(t=0){if(!this.isLoaded){this.log("Cannot play: not loaded");return}if(this.isPlaying){"suspended"===this.audioContext.state&&(this.audioContext.resume(),this.log("Resumed suspended context"));return}"suspended"===this.audioContext.state&&this.audioContext.resume();let i=this.audioContext.currentTime+.1,e=1/0;this.stemNodes.forEach(t=>{t.buffer.duration<e&&(e=t.buffer.duration)}),this.masterLoopDuration=e,this.masterGain.gain.setValueAtTime(0,i),this.masterGain.gain.linearRampToValueAtTime(this.config.masterVolume,i+1.5),this.playbackStartTime=i,this.playbackOffset=t,this.stemNodes.forEach((e,s)=>{let a=this.audioContext.createBufferSource();a.buffer=e.buffer,a.loop=!0,a.loopEnd=this.masterLoopDuration,a.connect(e.gain),a.start(i,t%this.masterLoopDuration),e.source=a,this.log(`Started: ${s} at offset ${t.toFixed(2)}s`)}),this.isPlaying=!0,this.log("Playback started with fade in")}stop(){this.isPlaying&&(this.stemNodes.forEach((t,i)=>{if(t.source){try{t.source.stop()}catch(e){}t.source=null}}),this.isPlaying=!1,this.log("Playback stopped"))}setStemGain(t,i,e=this.config.fadeDuration){let s=this.stemNodes.get(t);if(!s){DEBUG?console.warn(`Stem not found: ${t}`):'';return}let a=s.gain.gain,o=this.audioContext.currentTime;e>0?(a.cancelScheduledValues(o),a.setValueAtTime(a.value,o),a.linearRampToValueAtTime(i,o+e)):a.setValueAtTime(i,o),s.currentGain=i,this.log(`${t} gain -> ${i} (${e}s fade)`)}updateFromScroll(t){this.isLoaded&&this.isPlaying&&this.config.stems.forEach(i=>{let e=this.stemNodes.get(i.name);if(!e)return;let s;if(0===i.triggerAt)s=1;else{let a=i.triggerAt-.05,o=i.triggerAt+.05;s=t<a?0:t>o?1:(t-a)/.1}Math.abs(e.currentGain-s)>.01&&this.setStemGain(i.name,s,.3)})}setMasterVolume(t,i=1){if(!this.masterGain)return;let e=this.audioContext.currentTime;this.masterGain.gain.cancelScheduledValues(e),this.masterGain.gain.setValueAtTime(this.masterGain.gain.value,e),this.masterGain.gain.linearRampToValueAtTime(t,e+i),this.config.masterVolume=t,this.log(`Master volume -> ${t} (${i}s fade)`)}
@@ -977,8 +936,6 @@ toggleMute(){return this.isMuted=!this.isMuted,this.audioContext&&"suspended"===
 handleVisibilityChange(){if(!this.audioContext||!this.isPlaying)return;let t=this.audioContext.currentTime;if(document.hidden){if(this.playbackStartTime&&this.masterLoopDuration){let i=t-this.playbackStartTime+(this.playbackOffset||0);this._suspendedPosition=i%this.masterLoopDuration}"running"!==this.audioContext.state||this.isMuted||(this.masterGain.gain.cancelScheduledValues(t),this.masterGain.gain.setValueAtTime(this.masterGain.gain.value,t),this.masterGain.gain.linearRampToValueAtTime(0,t+.5),this._visibilityTimeout=setTimeout(()=>{document.hidden&&this.audioContext&&"running"===this.audioContext.state&&(this.audioContext.suspend(),this.log("Audio suspended (tab hidden)"))},500))}else if(this._visibilityTimeout&&(clearTimeout(this._visibilityTimeout),this._visibilityTimeout=null),void 0!==this._suspendedPosition){this.log(`Resyncing stems at position ${this._suspendedPosition.toFixed(2)}s`),this.stemNodes.forEach(t=>{if(t.source){try{t.source.stop()}catch(i){}t.source=null}}),this.isPlaying=!1;let e=()=>{this.play(this._suspendedPosition),this._suspendedPosition=void 0,this.log("Audio resynced and resumed (tab visible)")};"suspended"===this.audioContext.state?this.audioContext.resume().then(e):e()}else"suspended"===this.audioContext.state?this.audioContext.resume().then(()=>{if(!this.isMuted){let t=this.audioContext.currentTime;this.masterGain.gain.cancelScheduledValues(t),this.masterGain.gain.setValueAtTime(0,t),this.masterGain.gain.linearRampToValueAtTime(this.config.masterVolume,t+.5)}this.log("Audio resumed with fade in (tab visible)")}):this.isMuted||(this.masterGain.gain.cancelScheduledValues(t),this.masterGain.gain.setValueAtTime(this.masterGain.gain.value,t),this.masterGain.gain.linearRampToValueAtTime(this.config.masterVolume,t+.5),this.log("Audio faded in (tab visible)"))}getCurrentTime(){if(!this.audioContext||!this.isPlaying)return 0;let t=this.stemNodes.values().next().value;return t&&t.buffer?this.audioContext.currentTime%t.buffer.duration:0}getStemInfo(){let t=[];return this.stemNodes.forEach((i,e)=>{t.push({name:e,gain:i.currentGain,triggerAt:i.config.triggerAt})}),t}destroy(){this.stop(),document.removeEventListener("visibilitychange",this.handleVisibilityChange),this.audioContext&&(this.audioContext.close(),this.audioContext=null),this.stemNodes.clear(),this.isLoaded=!1,this.log("Audio system destroyed")}log(...t){this.config.debug}}
 
 function initAudioStemsWithScroll(t={}){player=new AudioStemsPlayer({debug:DEBUG,...t});window.audioStemsPlayer=player;let e=0;return{player:player,async start(){let t=await player.init();return t&&(function t(){if("undefined"==typeof ScrollTrigger){DEBUG?console.warn("ScrollTrigger not found, scroll-based audio disabled"):'';return}ScrollTrigger.create({trigger:document.body,start:"top top",end:"bottom bottom",onUpdate(t){e=t.progress,player.updateFromScroll(e)}})}(),player.play(),player.updateFromScroll(e)),t},toggleMute:()=>player.toggleMute(),setVolume(t){player.setMasterVolume(t)},stop(){player.stop()},isReady:()=>player.isLoaded,isPlaying:()=>player.isPlaying}}
-
-// function initHomeAudio() {let e=document.getElementById("audioEnableBtn"),t=document.getElementById("audioMuteBtn"),i=null,a=/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)||window.innerWidth<=991;if(a){let n=document.querySelector(".audio-control");n&&(n.style.display="none");return}i=initAudioStemsWithScroll({basePath:"https://cdn.prod.website-files.com/695f71824ef82b1e7dd190b4/",stems:[{name:"synth",file:"69650b64703b50c5ff6bae5c_synth.mp3",triggerAt:0,initialGain:1},{name:"bass",file:"69650b640c593a7a72a650fc_bass.mp3",triggerAt:0,initialGain:1},{name:"backing-vocals",file:"69650b64516153731e7d9985_backing-vocals.mp3",triggerAt:.2,initialGain:0},{name:"vocals",file:"69650b649b1c1def639b4e2f_vocals.mp3",triggerAt:.2,initialGain:0},{name:"drums",file:"69650b64ea9113fff0233159_drums.mp3",triggerAt:.4,initialGain:0}],fadeDuration:2,masterVolume:.8,debug:DEBUG,onLoadProgress(e,t){},onReady(){},onError(t){console.error("Audio error:",t),e.querySelector("span").textContent="Audio Error"}}),e.addEventListener("click",async()=>{e.classList.add("loading"),e.querySelector("span").textContent="Loading...";try{let a=await i.start();a?(e.classList.add("hidden"),t.classList.add("visible"),localStorage.setItem("7clouds-audio-enabled","true")):(e.querySelector("span").textContent="Try Again",e.classList.remove("loading"))}catch(n){console.error("Failed to start audio:",n),e.querySelector("span").textContent="Try Again",e.classList.remove("loading")}}),t.addEventListener("click",()=>{let e=i.toggleMute();t.classList.toggle("muted",e)})};
 
 function initHomeAudio() {
   let e = document.getElementById("audioEnableBtn"),
@@ -1056,12 +1013,20 @@ function isMobileOrTablet() {
   return isMobile || isTablet || isSmallScreen;
 }
 
-function initNavTooltips() {
+function initNavTooltips() { // TODO add resize listener to remove overflow clip if on tablet or below
   const nav = document.querySelector('[data-navigation]');
   if (!nav) return;
 
   const tooltipElements = nav.querySelectorAll('[data-css-tooltip-hover]');
   let timeoutId = null;
+
+  document.addEventListener('resize', (event) => {
+    if (isMobileOrTablet()) {
+      nav.style.overflow = 'visible';
+    } else {
+      nav.style.overflow = 'clip';
+    }
+  });
 
   tooltipElements.forEach((element) => {
     element.addEventListener('mouseenter', () => {
