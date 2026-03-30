@@ -1020,7 +1020,7 @@ function initNavTooltips() { // TODO add resize listener to remove overflow clip
   const tooltipElements = nav.querySelectorAll('[data-css-tooltip-hover]');
   let timeoutId = null;
 
-  document.addEventListener('resize', (event) => {
+  window.addEventListener('resize', (event) => {
     if (isMobileOrTablet()) {
       nav.style.overflow = 'visible';
     } else {
