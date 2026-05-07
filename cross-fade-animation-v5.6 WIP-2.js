@@ -1053,35 +1053,80 @@ function initNavTooltips() {
 
 // ARTICLE RELATED FUNCTIONS
 
+// function initArticleItemHoverAnimation(page) {
+
+//   const articleItems = page.querySelectorAll('[data-article-item]');
+
+//   if (articleItems.length === 0) return;
+
+//   articleItems.forEach((article) => {
+
+//     const articleBackground = article.querySelector('[data-article-background]');
+
+//     article.addEventListener('mouseenter', () => {
+
+//       gsap.to(articleBackground, {
+//         scale: 1.05,
+//         duration: 0.3,
+//         ease: "articleBackgroundScale"
+//       });
+
+//     })
+
+//     article.addEventListener('mouseleave', () => {
+
+//       gsap.to(articleBackground, {
+//         scale: 1,
+//         duration: 0.3,
+//         ease: "articleBackgroundScale"
+//       });
+
+//     })
+
+//   });
+
+// }
+
 function initArticleItemHoverAnimation(page) {
 
-  const articleItems = page.querySelectorAll('[data-article-item]');
+  page.addEventListener('mouseover', (event) => {
 
-  if (articleItems.length === 0) return;
+    const article = event.target.closest('[data-article-item]');
 
-  articleItems.forEach((article) => {
+    if (!article || !page.contains(article)) return;
+
+    // Prevent repeated triggers when moving between child elements
+    if (article.contains(event.relatedTarget)) return;
 
     const articleBackground = article.querySelector('[data-article-background]');
 
-    article.addEventListener('mouseenter', () => {
+    if (!articleBackground) return;
 
-      gsap.to(articleBackground, {
-        scale: 1.05,
-        duration: 0.3,
-        ease: "articleBackgroundScale"
-      });
+    gsap.to(articleBackground, {
+      scale: 1.05,
+      duration: 0.3,
+      ease: "articleBackgroundScale"
+    });
 
-    })
+  });
 
-    article.addEventListener('mouseleave', () => {
+  page.addEventListener('mouseout', (event) => {
 
-      gsap.to(articleBackground, {
-        scale: 1,
-        duration: 0.3,
-        ease: "articleBackgroundScale"
-      });
+    const article = event.target.closest('[data-article-item]');
 
-    })
+    if (!article || !page.contains(article)) return;
+
+    if (article.contains(event.relatedTarget)) return;
+
+    const articleBackground = article.querySelector('[data-article-background]');
+
+    if (!articleBackground) return;
+
+    gsap.to(articleBackground, {
+      scale: 1,
+      duration: 0.3,
+      ease: "articleBackgroundScale"
+    });
 
   });
 
