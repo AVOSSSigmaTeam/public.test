@@ -1,4 +1,4 @@
-// V 5.6.16
+// V 5.6.17
 import initSpotlightSection from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/spotlight-section-animation-v6.16.js";
 import initDemoSection from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/demo-section-animation_v2.4.js";
 import { hideYouTubeOverlay, initHallOfFame } from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/hall-of-fame_v8.4.js";
@@ -150,6 +150,23 @@ function initAfterEnterFunctions(next) {
   initButtonHoverAnimation(nextPage);
 
   initSimpleElementAnimations();
+
+  nextPage.addEventListener("click", (e) => {
+    const link = e.target.closest('a[href^="/submit-demo"]');
+    if (!link) return;
+
+    const currentHash = window.location.hash;
+
+    if (currentHash === "#submit-demo") {
+      e.preventDefault();
+
+      nextPage.querySelector("#submit-demo")?.scrollIntoView({
+        behavior: "smooth"
+      });
+
+      history.replaceState(null, "", "#submit-demo");
+    }
+  });
 
   if (hasScrollTrigger) {
     ScrollTrigger.refresh();
