@@ -1,4 +1,4 @@
-// V 5.6.8
+// V 5.6.9
 import initSpotlightSection from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/spotlight-section-animation-v6.16.js";
 import initDemoSection from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/demo-section-animation_v2.4.js";
 import { hideYouTubeOverlay, initHallOfFame } from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/hall-of-fame_v8.4.js";
@@ -111,7 +111,6 @@ function initAfterEnterFunctions(next) {
         initMarqueeScrollDirection();
         homeSpotlightSection.style.display = "block";
         initSpotlightSection();
-        scrollToHashAfterLayout();
         initDemoSection();
       }
       break;
