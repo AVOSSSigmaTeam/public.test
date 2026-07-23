@@ -1,4 +1,4 @@
-// V 5.6.12
+// V 5.6.13
 import initSpotlightSection from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/spotlight-section-animation-v6.16.js";
 import initDemoSection from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/demo-section-animation_v2.4.js";
 import { hideYouTubeOverlay, initHallOfFame } from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/hall-of-fame_v8.4.js";
@@ -17,7 +17,6 @@ console.log("immediate", target.getBoundingClientRect().top);
 setTimeout(() => {
   console.log("500ms", target.getBoundingClientRect().top);
 }, 500);
-
 setTimeout(() => {
   console.log("1000ms", target.getBoundingClientRect().top);
 }, 1000);
@@ -137,10 +136,12 @@ function initAfterEnterFunctions(next) {
         homeSpotlightSection.style.display = "block";
         initSpotlightSection();
         // document.querySelector(location.hash)?.scrollIntoView({ behavior: "smooth" });
+        if (DEBUG) console.log("Scroll to hash:", location.hash);
         lenis.scrollTo(location.hash, {
           immediate: false,
           duration: 1
         });
+        if (DEBUG) console.log("Scrolled to hash");
         initDemoSection();
       }
       break;
