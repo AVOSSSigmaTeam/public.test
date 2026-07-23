@@ -1,4 +1,4 @@
-// V 5.6.11
+// V 5.6.12
 import initSpotlightSection from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/spotlight-section-animation-v6.16.js";
 import initDemoSection from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/demo-section-animation_v2.4.js";
 import { hideYouTubeOverlay, initHallOfFame } from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/hall-of-fame_v8.4.js";
@@ -21,6 +21,12 @@ setTimeout(() => {
 setTimeout(() => {
   console.log("1000ms", target.getBoundingClientRect().top);
 }, 1000);
+setTimeout(() => {
+  console.log("2000ms", target.getBoundingClientRect().top);
+}, 2000);
+setTimeout(() => {
+  console.log("4000ms", target.getBoundingClientRect().top);
+}, 4000);
 
 if (document.querySelector('[data-spotlight-section]') && !isMobileOrTablet()) {
   history.scrollRestoration = "manual";
