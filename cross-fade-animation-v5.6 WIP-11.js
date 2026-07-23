@@ -1,4 +1,4 @@
-// V 5.6.10
+// V 5.6.11
 import initSpotlightSection from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/spotlight-section-animation-v6.16.js";
 import initDemoSection from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/demo-section-animation_v2.4.js";
 import { hideYouTubeOverlay, initHallOfFame } from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/hall-of-fame_v8.4.js";
@@ -10,13 +10,24 @@ gsap.registerPlugin(CustomEase, ScrollTrigger, SplitText);
 // history.scrollRestoration = "manual";
 // history.scrollRestoration = "auto";
 
+const target = document.querySelector(location.hash);
 
-  if (document.querySelector('[data-spotlight-section]') && !isMobileOrTablet()) {
-    history.scrollRestoration = "manual";
-    window.scrollTo(0, 0);
-  } else {
-    history.scrollRestoration = "auto";
-  }
+console.log("immediate", target.getBoundingClientRect().top);
+
+setTimeout(() => {
+  console.log("500ms", target.getBoundingClientRect().top);
+}, 500);
+
+setTimeout(() => {
+  console.log("1000ms", target.getBoundingClientRect().top);
+}, 1000);
+
+if (document.querySelector('[data-spotlight-section]') && !isMobileOrTablet()) {
+  history.scrollRestoration = "manual";
+  window.scrollTo(0, 0);
+} else {
+  history.scrollRestoration = "auto";
+}
 
 
 let lenis = null;
@@ -119,7 +130,11 @@ function initAfterEnterFunctions(next) {
         initMarqueeScrollDirection();
         homeSpotlightSection.style.display = "block";
         initSpotlightSection();
-        document.querySelector(location.hash)?.scrollIntoView({ behavior: "smooth" });
+        // document.querySelector(location.hash)?.scrollIntoView({ behavior: "smooth" });
+        lenis.scrollTo(location.hash, {
+          immediate: false,
+          duration: 1
+        });
         initDemoSection();
       }
       break;
