@@ -1,4 +1,4 @@
-// V 5.6.15
+// V 5.6.16
 import initSpotlightSection from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/spotlight-section-animation-v6.16.js";
 import initDemoSection from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/demo-section-animation_v2.4.js";
 import { hideYouTubeOverlay, initHallOfFame } from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/hall-of-fame_v8.4.js";
@@ -122,6 +122,10 @@ function initAfterEnterFunctions(next) {
       initSimpleLoaderAnimation();
       if (DEBUG) console.log("Run Loader Animation on Hall of Fame");
       initHallOfFame(nextPage);
+      break;
+
+    case 'submit-demo':
+      initDemoSection();
       break;
 
   }
