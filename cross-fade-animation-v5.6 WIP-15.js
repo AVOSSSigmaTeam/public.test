@@ -1,4 +1,4 @@
-// V 5.6.14
+// V 5.6.15
 import initSpotlightSection from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/spotlight-section-animation-v6.16.js";
 import initDemoSection from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/demo-section-animation_v2.4.js";
 import { hideYouTubeOverlay, initHallOfFame } from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/hall-of-fame_v8.4.js";
@@ -8,38 +8,7 @@ import { restartWebflow } from 'https://cdn.jsdelivr.net/npm/@finsweet/ts-utils/
 gsap.registerPlugin(CustomEase, ScrollTrigger, SplitText);
 
 // history.scrollRestoration = "manual";
-// history.scrollRestoration = "auto";
-
-const target = document.querySelector(location.hash);
-
-console.log("immediate", target.getBoundingClientRect().top);
-
-setTimeout(() => {
-  console.log("500ms", target.getBoundingClientRect().top);
-}, 500);
-setTimeout(() => {
-  console.log("1000ms", target.getBoundingClientRect().top);
-  if (DEBUG) console.log("Scroll to hash:", location.hash);
-  lenis.scrollTo(location.hash, {
-    immediate: false,
-    duration: 1
-}); 
-  if (DEBUG) console.log("Scrolled to hash");
-}, 1000);
-setTimeout(() => {
-  console.log("2000ms", target.getBoundingClientRect().top);
-}, 2000);
-setTimeout(() => {
-  console.log("4000ms", target.getBoundingClientRect().top);
-}, 4000);
-
-if (document.querySelector('[data-spotlight-section]') && !isMobileOrTablet()) {
-  history.scrollRestoration = "manual";
-  window.scrollTo(0, 0);
-} else {
-  history.scrollRestoration = "auto";
-}
-
+history.scrollRestoration = "auto";
 
 let lenis = null;
 let nextPage = document;
@@ -65,7 +34,7 @@ gsap.defaults({ ease: "default", duration: durationDefault });
 
 let cmsFilterInstance = null;
 
-const DEBUG = true; // Set to 'false' in production
+const DEBUG = false; // Set to 'false' in production
 
 const navSubmitDemoButton = document.querySelector('[data-nav-submit-demo-button]');
 const loadingContainer = document.querySelector('[data-loader-container]');
@@ -141,13 +110,6 @@ function initAfterEnterFunctions(next) {
         initMarqueeScrollDirection();
         homeSpotlightSection.style.display = "block";
         initSpotlightSection();
-        // document.querySelector(location.hash)?.scrollIntoView({ behavior: "smooth" });
-        // if (DEBUG) console.log("Scroll to hash:", location.hash);
-        // lenis.scrollTo(location.hash, {
-        //   immediate: false,
-        //   duration: 1
-        // });
-        // if (DEBUG) console.log("Scrolled to hash");
         initDemoSection();
       }
       break;
