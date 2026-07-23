@@ -1,4 +1,4 @@
-// V 5.6.7
+// V 5.6.8
 import initSpotlightSection from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/spotlight-section-animation-v6.16.js";
 import initDemoSection from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/demo-section-animation_v2.4.js";
 import { hideYouTubeOverlay, initHallOfFame } from "https://cdn.jsdelivr.net/gh/AVOSSSigmaTeam/public.test/hall-of-fame_v8.4.js";
@@ -35,7 +35,7 @@ gsap.defaults({ ease: "default", duration: durationDefault });
 
 let cmsFilterInstance = null;
 
-const DEBUG = false; // Set to 'false' in production
+const DEBUG = true; // Set to 'false' in production
 
 const navSubmitDemoButton = document.querySelector('[data-nav-submit-demo-button]');
 const loadingContainer = document.querySelector('[data-loader-container]');
